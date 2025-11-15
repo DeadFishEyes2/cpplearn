@@ -2,6 +2,7 @@
 #include "assert.h"
 #include <iostream>
 #include <exception>
+#include <iomanip>
 
 Sq_Matrix::Sq_Matrix() = default;
 
@@ -73,12 +74,17 @@ Sq_Matrix& Sq_Matrix::operator=(const Sq_Matrix& other){
     return *this;
 }
 
-void Sq_Matrix::consolePrint() {
+void Sq_Matrix::consolePrint(){
+    const int width = 8;          // total column width
+    const int precision = 2;      // decimals
+
+    std::cout << std::fixed << std::setprecision(precision);
+
     for (int i = 0; i < num_rows; i++) {
         for (int j = 0; j < num_rows; j++) {
-            std::cout << (*this)[i][j] << ' ';
+            std::cout << std::setw(width) << (*this)[i][j] << " ";
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
 }
 

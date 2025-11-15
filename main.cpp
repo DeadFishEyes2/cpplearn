@@ -18,7 +18,7 @@ int main() {
 
     int* p = nullptr;
     Sq_Matrix U, M;
-    gaussianEliminatePartialPermutation(A, U, M, p);
+    gaussianEliminationPartialPermutation(A, U, M, p);
 
     std::cout << "\nMatrix U:\n";
     U.consolePrint();

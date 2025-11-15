@@ -2,7 +2,7 @@
 #include "assert.h"
 #include <stdexcept>
 
-void gaussianEliminate(Sq_Matrix& A){
+void gaussianElimination(Sq_Matrix& A){
     int n = A.getNumCols();
 
     for (int k = 0; k < n-1; k++){
@@ -20,9 +20,9 @@ void gaussianEliminate(Sq_Matrix& A){
     }
 }
 
-void gaussianEliminate(const Sq_Matrix& A, Sq_Matrix& U){
+void gaussianElimination(const Sq_Matrix& A, Sq_Matrix& U){
     U = A;
-    gaussianEliminate(U);
+    gaussianElimination(U);
 }
 
 void separateUM(Sq_Matrix& U, Sq_Matrix& M){
@@ -40,14 +40,14 @@ void separateUM(Sq_Matrix& U, Sq_Matrix& M){
     }
 }
 
-void gaussianEliminate(const Sq_Matrix& A, Sq_Matrix& U, Sq_Matrix& M){
+void gaussianElimination(const Sq_Matrix& A, Sq_Matrix& U, Sq_Matrix& M){
     U = A;
-    gaussianEliminate(U);
+    gaussianElimination(U);
     M = U;
     separateUM(U, M);
 }
 
-void gaussianEliminatePartialPermutation(Sq_Matrix &A, int* &p){
+void gaussianEliminationPartialPermutation(Sq_Matrix &A, int* &p){
     int n = A.getNumRows();
     
     if (p != nullptr){
@@ -74,14 +74,14 @@ void gaussianEliminatePartialPermutation(Sq_Matrix &A, int* &p){
     }
 }
 
-void gaussianEliminatePartialPermutation(const Sq_Matrix& A, Sq_Matrix& U, int* &p){
+void gaussianEliminationPartialPermutation(const Sq_Matrix& A, Sq_Matrix& U, int* &p){
     U = A;
-    gaussianEliminatePartialPermutation(U, p);
+    gaussianEliminationPartialPermutation(U, p);
 }
 
-void gaussianEliminatePartialPermutation(const Sq_Matrix& A, Sq_Matrix& U, Sq_Matrix& M, int* &p){
+void gaussianEliminationPartialPermutation(const Sq_Matrix& A, Sq_Matrix& U, Sq_Matrix& M, int* &p){
     U = A;
-    gaussianEliminatePartialPermutation(U,p);
+    gaussianEliminationPartialPermutation(U,p);
     M = U;
     separateUM(U, M);
 }
