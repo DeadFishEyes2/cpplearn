@@ -1,5 +1,5 @@
 #include "Matrix/Matrix.hpp"
-#include "NumericalMethods/nm.hpp"
+#include "NumericalMethods/Gauss/gauss.hpp"
 #include <iostream>
 
 int main() {

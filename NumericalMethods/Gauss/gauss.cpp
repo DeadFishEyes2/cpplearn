@@ -1,4 +1,4 @@
-#include "nm.hpp"
+#include "gauss.hpp"
 #include "assert.h"
 #include <stdexcept>
 
@@ -88,7 +88,7 @@ void gaussianEliminationPartialPermutation(const Sq_Matrix& A, Sq_Matrix& U, Sq_
 
 void gaussianEliminationCompletePermutation(Sq_Matrix& A, int* &p, int* &q){
     int n = A.getNumRows();
-    
+
     if (p != nullptr)
         delete[] p;
     p = new int[n-1];

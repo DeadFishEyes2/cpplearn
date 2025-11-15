@@ -1,4 +1,4 @@
-#include "../Matrix/Matrix.hpp"
+#include "../../Matrix/Matrix.hpp"
 
 void gaussianElimination(Sq_Matrix& A);
 
