@@ -86,6 +86,48 @@ void gaussianEliminationPartialPermutation(const Sq_Matrix& A, Sq_Matrix& U, Sq_
     separateUM(U, M);
 }
 
+void gaussianEliminationCompletePermutation(Sq_Matrix& A, int* &p, int* &q){
+    int n = A.getNumRows();
+    
+    if (p != nullptr)
+        delete[] p;
+    p = new int[n-1];
+
+    if (q != nullptr)
+        delete[] q;
+    q = new int[n-1];
+
+    for (int k = 0; k < n-1; k++){
+        A.getMaxOnMatrix(p[k], q[k], k, k);
+        A.swapRows(k, p[k]);
+        A.swapCols(k, q[k]);
+
+        if (A[k][k] == 0)
+            throw std::invalid_argument("All elements of the submatrix are 0");
+
+        for (int i = k+1; i < n; i++){
+            A[i][k] = A[i][k]/A[k][k];
+        }
+        for (int i = k+1; i < n; i++){
+            for (int j = k+1; j < n; j++){
+                A[i][j] = A[i][j] - A[i][k]*A[k][j];
+            }
+        }
+    }
+}
+
+void gaussianEliminationCompletePermutation(const Sq_Matrix& A, Sq_Matrix& U, int* &p, int* &q){
+    U = A;
+    gaussianEliminationCompletePermutation(U,p,q);
+}
+
+void gaussianEliminationCompletePermutation(const Sq_Matrix& A, Sq_Matrix& U, Sq_Matrix& M, int* &p, int* &q){
+    U = A;
+    gaussianEliminationCompletePermutation(U, p, q);
+    M = U;
+    separateUM(U, M);
+}
+
 Sq_Matrix* getMultiplicators(const Sq_Matrix& A){
     int n = A.getNumCols();
     Sq_Matrix* M = new Sq_Matrix[n-1];

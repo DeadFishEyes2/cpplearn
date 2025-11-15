@@ -32,6 +32,7 @@ class Sq_Matrix{
         int getNumCols() const;
         int getMaxOnRow(int, int = 0, int = -1) const;
         int getMaxOnColumn(int, int = 0, int = -1) const;
+        void getMaxOnMatrix(int&, int&, int = 0, int = 0, int = -1, int = -1);
         
         //inplace swaps, first term is the index swapped and the second is the swapper
         void swapRows(int, int);

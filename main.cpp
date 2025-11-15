@@ -17,8 +17,9 @@ int main() {
     A.consolePrint();
 
     int* p = nullptr;
+    int* q = nullptr;
     Sq_Matrix U, M;
-    gaussianEliminationPartialPermutation(A, U, M, p);
+    gaussianEliminationCompletePermutation(A, U, M, p, q);
 
     std::cout << "\nMatrix U:\n";
     U.consolePrint();
@@ -29,13 +30,16 @@ int main() {
     for (int i = 0; i < 2; i++){
         A.swapRows(i, p[i]);
     }
-
+    
     Sq_Matrix* N = getMultiplicators(M);
     for (int i = 0; i < 2; i++){
         A = N[i]*A;
     }
+    for (int i = 0; i < 2; i++){
+        A.swapCols(i, q[i]);
+    }
 
-    std::cout << "\nMatrix M*A:\n";
+    std::cout << "\nMatrix M*P*A*Q:\n";
     A.consolePrint();
 
     return 0;
