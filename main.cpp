@@ -1,6 +1,7 @@
 #include "Matrix/Matrix.hpp"
 #include "NumericalMethods/Gauss/gauss.hpp"
 #include "NumericalMethods/Crout/crout.hpp"
+#include "NumericalMethods/Doolittle/doolittle.hpp"
 #include <iostream>
 
 int main() {
@@ -18,7 +19,7 @@ int main() {
     A.consolePrint();
 
     Sq_Matrix L, U;
-    crout(A, L, U);
+    doolittle(A, L, U);
 
     std::cout << "Matrix L:\n";
     L.consolePrint();

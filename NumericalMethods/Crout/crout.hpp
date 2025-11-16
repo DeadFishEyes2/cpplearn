@@ -1,3 +1,4 @@
+#pragma once
 #include "../../Matrix/Sq_Matrix.hpp"
 
 void crout(Sq_Matrix& A);

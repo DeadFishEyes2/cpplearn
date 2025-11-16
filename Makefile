@@ -9,6 +9,7 @@ SRC_DIR = .
 MATRIX_DIR = Matrix
 GAUSS_DIR = NumericalMethods/Gauss
 CROUT_DIR = NumericalMethods/Crout
+DOOLITTLE_DIR = NumericalMethods/Doolittle
 METHODS_DIR = NumericalMethods
 OBJ_DIR = obj
 BIN_DIR = .
@@ -21,7 +22,8 @@ SRCS = main.cpp \
        $(MATRIX_DIR)/Matrix.cpp \
        $(MATRIX_DIR)/Sq_Matrix.cpp \
        $(GAUSS_DIR)/gauss.cpp \
-	   $(CROUT_DIR)/crout.cpp
+	   $(CROUT_DIR)/crout.cpp \
+	   $(DOOLITTLE_DIR)/doolittle.cpp
 
 # Object files
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
