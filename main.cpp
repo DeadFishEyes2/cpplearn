@@ -1,5 +1,6 @@
 #include "Matrix/Matrix.hpp"
 #include "NumericalMethods/Gauss/gauss.hpp"
+#include "NumericalMethods/Crout/crout.hpp"
 #include <iostream>
 
 int main() {
@@ -16,31 +17,17 @@ int main() {
     std::cout << "Initial matrix A:\n";
     A.consolePrint();
 
-    int* p = nullptr;
-    int* q = nullptr;
-    Sq_Matrix U, M;
-    gaussianEliminationCompletePermutation(A, U, M, p, q);
+    Sq_Matrix L, U;
+    crout(A, L, U);
 
-    std::cout << "\nMatrix U:\n";
+    std::cout << "Matrix L:\n";
+    L.consolePrint();
+
+    std::cout << "Matrix U:\n";
     U.consolePrint();
-
-    std::cout << "\nMatrix M:\n";
-    M.consolePrint();
-
-    for (int i = 0; i < 2; i++){
-        A.swapRows(i, p[i]);
-    }
     
-    Sq_Matrix* N = getMultiplicators(M);
-    for (int i = 0; i < 2; i++){
-        A = N[i]*A;
-    }
-    for (int i = 0; i < 2; i++){
-        A.swapCols(i, q[i]);
-    }
-
-    std::cout << "\nMatrix M*P*A*Q:\n";
-    A.consolePrint();
+    std::cout << "Matrix L*U:\n";
+    (L*U).consolePrint();
 
     return 0;
 }

@@ -25,7 +25,9 @@ class Sq_Matrix{
         void setData(int, const float* = nullptr);
         
         //Creates an I matrix of size n
-        void eye(int);
+        void eye(int n = -1);
+        //Creates an O matrix of size n
+        void zero(int n = -1);
 
         //getters
         int getNumRows() const;

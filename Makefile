@@ -8,6 +8,7 @@ LDFLAGS =
 SRC_DIR = .
 MATRIX_DIR = Matrix
 GAUSS_DIR = NumericalMethods/Gauss
+CROUT_DIR = NumericalMethods/Crout
 METHODS_DIR = NumericalMethods
 OBJ_DIR = obj
 BIN_DIR = .
@@ -19,7 +20,8 @@ TARGET = $(BIN_DIR)/main
 SRCS = main.cpp \
        $(MATRIX_DIR)/Matrix.cpp \
        $(MATRIX_DIR)/Sq_Matrix.cpp \
-       $(GAUSS_DIR)/gauss.cpp
+       $(GAUSS_DIR)/gauss.cpp \
+	   $(CROUT_DIR)/crout.cpp
 
 # Object files
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

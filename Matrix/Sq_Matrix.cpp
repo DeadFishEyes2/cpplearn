@@ -126,7 +126,15 @@ int Sq_Matrix::getMaxOnColumn(int column, int starting_row, int ending_row) cons
     return best_row;
 }
 
+void Sq_Matrix::zero(int n){
+    if (n == -1)
+        n = num_rows;
+    setData(n);
+}
+
 void Sq_Matrix::eye(int n){
+    if (n == -1)
+        n = num_rows;
     setData(n);
     for (int i = 0; i < n; i++){
         (*this)[i][i] = 1;
