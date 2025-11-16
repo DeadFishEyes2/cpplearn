@@ -1,0 +1,13 @@
+.vscode/c_cpp_properties.json
+.vscode/settings.json
+main
+
+# General C build artifacts
+*.o
+*.out
+*.exe
+build/
+obj/
+
+# VSCode
+.vscode/
