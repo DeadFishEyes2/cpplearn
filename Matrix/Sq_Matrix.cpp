@@ -49,7 +49,7 @@ const float* Sq_Matrix::operator[](int i) const{
     return &data[i*num_rows];
 }
 
-Sq_Matrix Sq_Matrix::operator*(Sq_Matrix& other){
+Sq_Matrix Sq_Matrix::operator*(const Sq_Matrix& other) const{
     if (this->num_rows != other.num_rows){
         throw std::invalid_argument("Matrix multiplication needs matching dimensions");
     }
@@ -153,14 +153,12 @@ void Sq_Matrix::swapCols(int swapped_index, int swapper_index){
     }
 }
 
-Sq_Matrix& Sq_Matrix::t(){
-    Sq_Matrix *T = new Sq_Matrix {*this};
-    for (int i = 0; i < num_rows; i++){
-        for (int j = 0; j < i; j++){
-            std::swap((*T)[i][j],(*T)[j][i]);
-        }
-    }
-    return *T;
+Sq_Matrix Sq_Matrix::t() const {
+    Sq_Matrix T(*this);
+    for (int i = 0; i < num_rows; i++)
+        for (int j = 0; j < i; j++)
+            std::swap(T[i][j], T[j][i]);
+    return T;  // safe, moves automatically
 }
 
 void Sq_Matrix::getMaxOnMatrix(int& p, int& q, int starting_row, int starting_column, int ending_row, int ending_column){

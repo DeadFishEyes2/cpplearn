@@ -19,7 +19,7 @@ class Sq_Matrix{
         Sq_Matrix& operator=(const Sq_Matrix&);
         
         //matrix multiplication
-        Sq_Matrix operator*(Sq_Matrix&);
+        Sq_Matrix operator*(const Sq_Matrix&) const;
 
         //empties the data from this Matrix and replaces it with the buffer
         void setData(int, const float* = nullptr);
@@ -41,7 +41,7 @@ class Sq_Matrix{
         void swapCols(int, int);
 
         //transpose
-        Sq_Matrix& t();
+        Sq_Matrix t() const;
         
         //prints the data in the console
         void consolePrint();
