@@ -2,7 +2,7 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -O2
 DEBUGFLAGS = -g -DDEBUG
-LDFLAGS = 
+LDFLAGS = -lm
 
 # Directories
 SRC_DIR = .
@@ -10,6 +10,7 @@ MATRIX_DIR = Matrix
 GAUSS_DIR = NumericalMethods/Gauss
 CROUT_DIR = NumericalMethods/Crout
 DOOLITTLE_DIR = NumericalMethods/Doolittle
+CHOLESKY_DIR = NumericalMethods/Cholesky
 METHODS_DIR = NumericalMethods
 OBJ_DIR = obj
 BIN_DIR = .
@@ -23,7 +24,8 @@ SRCS = main.cpp \
        $(MATRIX_DIR)/Sq_Matrix.cpp \
        $(GAUSS_DIR)/gauss.cpp \
 	   $(CROUT_DIR)/crout.cpp \
-	   $(DOOLITTLE_DIR)/doolittle.cpp
+	   $(DOOLITTLE_DIR)/doolittle.cpp \
+	   $(CHOLESKY_DIR)/cholesky.cpp
 
 # Object files
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

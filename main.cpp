@@ -2,7 +2,9 @@
 #include "NumericalMethods/Gauss/gauss.hpp"
 #include "NumericalMethods/Crout/crout.hpp"
 #include "NumericalMethods/Doolittle/doolittle.hpp"
+#include "NumericalMethods/Cholesky/cholesky.hpp"
 #include <iostream>
+#include <stdexcept>
 
 int main() {
     
@@ -18,17 +20,25 @@ int main() {
     std::cout << "Initial matrix A:\n";
     A.consolePrint();
 
-    Sq_Matrix L, U;
-    doolittle(A, L, U);
+    std::cout << "Matrix A':\n";
+    A.t().consolePrint();
 
-    std::cout << "Matrix L:\n";
-    L.consolePrint();
-
-    std::cout << "Matrix U:\n";
-    U.consolePrint();
+    std::cout << "Positively defined matrix A:\n";
+    A =  A.t() * A ;
+    A.consolePrint();
     
-    std::cout << "Matrix L*U:\n";
-    (L*U).consolePrint();
+    try{
+        Sq_Matrix L;
+        chol(A, L);
+        std::cout << "Matrix L:\n";
+        L.consolePrint();
+
+        std::cout << "Matrix LL':\n";
+        (L*L.t()).consolePrint();
+    } catch (std::exception& e){
+        std::cout << "ERROR: " << e.what() << std::endl;
+    }
+    
 
     return 0;
 }

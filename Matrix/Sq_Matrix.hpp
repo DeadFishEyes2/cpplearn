@@ -39,6 +39,9 @@ class Sq_Matrix{
         //inplace swaps, first term is the index swapped and the second is the swapper
         void swapRows(int, int);
         void swapCols(int, int);
+
+        //transpose
+        Sq_Matrix& t();
         
         //prints the data in the console
         void consolePrint();

@@ -153,6 +153,16 @@ void Sq_Matrix::swapCols(int swapped_index, int swapper_index){
     }
 }
 
+Sq_Matrix& Sq_Matrix::t(){
+    Sq_Matrix *T = new Sq_Matrix {*this};
+    for (int i = 0; i < num_rows; i++){
+        for (int j = 0; j < i; j++){
+            std::swap((*T)[i][j],(*T)[j][i]);
+        }
+    }
+    return *T;
+}
+
 void Sq_Matrix::getMaxOnMatrix(int& p, int& q, int starting_row, int starting_column, int ending_row, int ending_column){
     p = starting_row;
     q = starting_column;

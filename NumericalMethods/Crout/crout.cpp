@@ -1,7 +1,11 @@
 #include "crout.hpp"
+#include <stdexcept>
 
 void crout(Sq_Matrix& A){
     int n = A.getNumRows();
+    if (A[0][0]){
+        throw std::invalid_argument("One of the elements of L's diagonal is 0");
+    }
     for (int j = 1; j < n; j++){
         A[0][j] = A[0][j]/A[0][0];
     }
@@ -11,6 +15,9 @@ void crout(Sq_Matrix& A){
             for (int l = 0; l < k; l++)
                 sum += A[i][l]*A[l][k];
             A[i][k] = A[i][k] - sum;
+        }
+        if (A[k][k]){
+            throw std::invalid_argument("One of the elements of L's diagonal is 0");
         }
         if (k == n-1)
             break;
