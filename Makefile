@@ -25,7 +25,11 @@ SRCS = main.cpp \
        $(GAUSS_DIR)/gauss.cpp \
 	   $(CROUT_DIR)/crout.cpp \
 	   $(DOOLITTLE_DIR)/doolittle.cpp \
-	   $(CHOLESKY_DIR)/cholesky.cpp
+	   $(CHOLESKY_DIR)/cholesky.cpp \
+	   $(METHODS_DIR)/UTRIS/utris.cpp \
+	   $(METHODS_DIR)/LTRIS/ltris.cpp \
+	   $(METHODS_DIR)/Inversion/linv.cpp \
+	   $(METHODS_DIR)/Inversion/uinv.cpp
 
 # Object files
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

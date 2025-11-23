@@ -20,6 +20,7 @@ class Sq_Matrix{
         
         //matrix multiplication
         Sq_Matrix operator*(const Sq_Matrix&) const;
+        float* operator*(const float*) const;
 
         //empties the data from this Matrix and replaces it with the buffer
         void setData(int, const float* = nullptr);

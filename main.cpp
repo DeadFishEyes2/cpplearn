@@ -3,6 +3,10 @@
 #include "NumericalMethods/Crout/crout.hpp"
 #include "NumericalMethods/Doolittle/doolittle.hpp"
 #include "NumericalMethods/Cholesky/cholesky.hpp"
+#include "NumericalMethods/UTRIS/utris.hpp"
+#include "NumericalMethods/LTRIS/ltris.hpp"
+#include "NumericalMethods/Inversion/linv.hpp"
+#include "NumericalMethods/Inversion/uinv.hpp"
 #include <iostream>
 #include <stdexcept>
 
@@ -32,12 +36,36 @@ int main() {
         chol(A, L);
         std::cout << "Matrix L:\n";
         L.consolePrint();
+        
+        float b[] = {1, 2, 3};
+        float x[] = {0, 0, 0};
+        
+        Sq_Matrix L_inv(3);
+        linv(L, L_inv);
+        // A = L * L'
+        // A * x = b
+        // L * L' * x = b   
+        // L' * x = L_inv * b   
+        float* L_inv_b = L_inv * b;
+        utris(L.t(), L_inv_b, x);
 
-        std::cout << "Matrix LL':\n";
-        (L*L.t()).consolePrint();
+        std::cout << "Solution x:\n";
+        for (int i = 0; i < 3; i++) {
+            std::cout << "x[" << i << "]: " << x[i] << std::endl;
+        }
+        delete[] L_inv_b;
+
+        float* Res = A * x;
+        for (int i = 0; i < 3; i++) {
+            std::cout << "Res[" << i << "]: " << Res[i] << " (expected " << b[i] << ")" << std::endl;
+        }
+        delete[] Res;
+
     } catch (std::exception& e){
         std::cout << "ERROR: " << e.what() << std::endl;
     }
+
+    
     
 
     return 0;

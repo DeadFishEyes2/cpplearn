@@ -65,6 +65,17 @@ Sq_Matrix Sq_Matrix::operator*(const Sq_Matrix& other) const{
     return Res;
 }
 
+float* Sq_Matrix::operator*(const float* x) const{
+    float* Res = new float[this->num_rows];
+    for (int i = 0; i < this->num_rows; i++){
+        Res[i] = 0;
+        for (int j = 0; j < this->num_rows; j++){
+            Res[i] += (*this)[i][j] * x[j];
+        }
+    }
+    return Res;
+}
+
 Sq_Matrix& Sq_Matrix::operator=(const Sq_Matrix& other){
     if (this == &other)
         return *this;
