@@ -1,12 +1,12 @@
-#include "Matrix/Matrix.hpp"
-#include "NumericalMethods/Gauss/gauss.hpp"
-#include "NumericalMethods/Crout/crout.hpp"
-#include "NumericalMethods/Doolittle/doolittle.hpp"
-#include "NumericalMethods/Cholesky/cholesky.hpp"
-#include "NumericalMethods/UTRIS/utris.hpp"
-#include "NumericalMethods/LTRIS/ltris.hpp"
-#include "NumericalMethods/Inversion/linv.hpp"
-#include "NumericalMethods/Inversion/uinv.hpp"
+#include "Matrix.hpp"
+#include "gauss.hpp"
+#include "crout.hpp"
+#include "doolittle.hpp"
+#include "cholesky.hpp"
+#include "utris.hpp"
+#include "ltris.hpp"
+#include "linv.hpp"
+#include "uinv.hpp"
 #include <iostream>
 #include <stdexcept>
 

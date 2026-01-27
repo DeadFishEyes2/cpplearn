@@ -1,87 +1,42 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -O2
-DEBUGFLAGS = -g -DDEBUG
-LDFLAGS = -lm
-
-# Directories
-SRC_DIR = .
-MATRIX_DIR = Matrix
-GAUSS_DIR = NumericalMethods/Gauss
-CROUT_DIR = NumericalMethods/Crout
-DOOLITTLE_DIR = NumericalMethods/Doolittle
-CHOLESKY_DIR = NumericalMethods/Cholesky
-METHODS_DIR = NumericalMethods
+INC_DIR = include
+SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = .
+
+# This finds all subdirectories within 'include' and adds them as -I paths
+# It ignores hidden directories and the directory itself (.)
+INCLUDE_PATHS = $(shell find $(INC_DIR) -type d -not -path '*/.*')
+INC_FLAGS = $(addprefix -I,$(INCLUDE_PATHS))
+
+CXXFLAGS = -Wall -Wextra -std=c++17 -O2 $(INC_FLAGS)
+LDFLAGS = -lm
 
 # Target executable
 TARGET = $(BIN_DIR)/main
 
 # Source files
-SRCS = main.cpp \
-       $(MATRIX_DIR)/Matrix.cpp \
-       $(MATRIX_DIR)/Sq_Matrix.cpp \
-       $(GAUSS_DIR)/gauss.cpp \
-	   $(CROUT_DIR)/crout.cpp \
-	   $(DOOLITTLE_DIR)/doolittle.cpp \
-	   $(CHOLESKY_DIR)/cholesky.cpp \
-	   $(METHODS_DIR)/UTRIS/utris.cpp \
-	   $(METHODS_DIR)/LTRIS/ltris.cpp \
-	   $(METHODS_DIR)/Inversion/linv.cpp \
-	   $(METHODS_DIR)/Inversion/uinv.cpp
-
-# Object files
+SRCS = main.cpp $(shell find $(SRC_DIR) -name '*.cpp')
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 # Default target
 all: $(TARGET)
 
-# Link object files to create executable
+# Link
 $(TARGET): $(OBJS)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET) $(LDFLAGS)
-	@echo "Build complete: $(TARGET)"
+	$(CXX) $(OBJS) -o $(TARGET) $(LDFLAGS)
+	@echo "Linked: $(TARGET)"
 
-# Compile source files to object files
+# Rule for object files
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Debug build
-debug: CXXFLAGS += $(DEBUGFLAGS)
-debug: clean $(TARGET)
-
-# Clean build artifacts
+# Clean
 clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
-	@echo "Clean complete"
+	@echo "Cleaned build artifacts."
 
-# Remove only object files
-clean-obj:
-	rm -rf $(OBJ_DIR)
-	@echo "Object files removed"
-
-# Rebuild from scratch
-rebuild: clean all
-
-# Run the program
-run: $(TARGET)
-	./$(TARGET)
-
-# Print variables for debugging makefile
-print-%:
-	@echo $* = $($*)
-
-# Help target
-help:
-	@echo "Available targets:"
-	@echo "  all (default) - Build the project"
-	@echo "  debug         - Build with debug flags"
-	@echo "  clean         - Remove all build artifacts"
-	@echo "  clean-obj     - Remove only object files"
-	@echo "  rebuild       - Clean and rebuild"
-	@echo "  run           - Build and run the program"
-	@echo "  help          - Show this help message"
-
-.PHONY: all debug clean clean-obj rebuild run help print-%
+.PHONY: all clean
